@@ -1,0 +1,39 @@
+CREATE TABLE IF NOT EXISTS items (
+    id SERIAL PRIMARY KEY,
+    code TEXT NOT NULL,
+    unit INT NOT NULL,
+    age INT NOT NULL,
+    cost DECIMAL(10,2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (code, unit, age, cost)
+);
+
+CREATE OR REPLACE FUNCTION add_call(
+    p_code TEXT,
+    p_unit INT,
+    p_age INT,
+    p_cost DECIMAL(10,2)
+)
+RETURNS TABLE(id INT, status INT, message TEXT)
+AS $$
+DECLARE
+    v_existing_id INT;
+    v_new_id INT;
+BEGIN
+    SELECT items.id INTO v_existing_id 
+    FROM items
+    WHERE code = p_code AND unit = p_unit AND age = p_age AND cost = p_cost;
+
+    IF FOUND THEN
+        RETURN QUERY SELECT v_existing_id, 0, 'Duplicate entry detected in database'::TEXT;
+    ELSE
+        INSERT INTO items (code, unit, age, cost)
+        VALUES (p_code, p_unit, p_age, p_cost)
+        RETURNING items.id INTO v_new_id;
+        
+        RETURN QUERY SELECT v_new_id, 1, 'Item added successfully to database'::TEXT;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE INDEX IF NOT EXISTS idx_items_unique_fields ON items (code, unit, age, cost);
