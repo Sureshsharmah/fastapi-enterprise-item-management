@@ -48,7 +48,7 @@ This project demonstrates a complete backend solution built in three progressive
 ### **1. Clone Repository**
 
 ```shellscript
-git clone https://github.com/yourusername/fastapi-assessment.git
+git clone https://github.com/Sureshsharmah/fastapi-enterprise-item-management
 cd fastapi-assessment
 ```
 
@@ -61,9 +61,6 @@ python -m venv venv
 # Activate virtual environment
 # Windows:
 venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
-```
 
 ### **3. Install Dependencies**
 
