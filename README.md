@@ -35,7 +35,114 @@ This project demonstrates a complete backend solution built in three progressive
 | `/clear` | POST | Clear all items
 | `/health` | GET | Health check and system status
 
+-----------------------------------------------------------------------------------------------
+# # Complete Testing Sequence by adding 5 Items
+# # POST/add
 
+# {
+#   "id": 1,
+#   "code": "LAPTOP001",
+#   "unit": 10,
+#   "age": 2,
+#   "cost": 999.99
+# }
+
+# {
+#   "id": 2,
+#   "code": "MOUSE001",
+#   "unit": 25,
+#   "age": 1,
+#   "cost": 29.99
+# }
+
+# {
+#   "id": 3,
+#   "code": "KEYBOARD001",
+#   "unit": 15,
+#   "age": 3,
+#   "cost": 79.99
+# }
+
+# {
+#   "id": 4,
+#   "code": "MONITOR001",
+#   "unit": 8,
+#   "age": 1,
+#   "cost": 299.99
+# }
+
+# {
+#   "id": 5,
+#   "code": "HEADPHONES001",
+#   "unit": 20,
+#   "age": 2,
+#   "cost": 149.99
+# }
+# # -------------------------------------------------------------------------------------------
+# # Snapshot Operations (Test All Sorting)
+# # POST/Snapshot
+
+# {
+#   "sort_by": "cost"
+# }
+
+# {
+#   "sort_by": "age"
+# }
+# # --------------------------------------------------------------------------------------------
+# # Remove Operations
+# # POST/remove
+
+# {
+#   "id": 2
+# }
+
+# {
+#   "sort_by": "cost"
+# }
+# # ----------------------------------------------------------------------------------------------
+# # Remove Item 4 (Monitor)
+# # POST/remove:
+
+# {
+#   "id": 4
+# }
+# # ----------------------------------------------------------------------------------------------
+# # Verify Removal Again
+# # POST/snapshot`:
+
+# {
+#   "sort_by": "cost"
+# }
+# # -----------------------------------------------------------------------------------------------
+
+# # Health Check
+# # GET/health
+
+
+# # -----------------------------------------------------------------------------------------------
+# # Duplicate Prevention Test
+
+# # Try Adding Duplicate Laptop
+# # POST/add:
+
+# {
+#   "id": 6,
+#   "code": "LAPTOP001",
+#   "unit": 10,
+#   "age": 2,
+#   "cost": 999.99
+# }
+
+# # -----------------------------------------------------------------------------------------------
+
+# # Final Clear Operation
+# # POST/clear
+
+It will drop all rows
+
+
+---------------------------------------------------------------------------------------------------
 ## 🚀 **Quick Start**
 
 ### **Prerequisites**
